@@ -3,19 +3,27 @@ import {View, Text,Image,StyleSheet, useWindowDimensions,ScrollView} from 'react
 import Logo from '../../../assets/images/Logo_1.png'
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
+import { useNavigation } from '@react-navigation/native';
 export default function SignInScreen() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const onSignInPressed = () => {
     console.warn("Sign in");
+    //validate user
+
+    navigation.navigate('Home');
   }
   const onForgotPasswordPressed = () =>{
     console.warn('onForgotPasswordPressed');
+    navigation.navigate('ForgotPassword');
   }
   const onSignUpPressed = () => {
     console.warn('On SignUpPress');
+
+    navigation.navigate('SignUp');
   }
     const {height} = useWindowDimensions();
+    const navigation = useNavigation();
     return (<ScrollView showsVerticalScrollIndicator={false}>      
       <View style = {styles.root}>
     <Image source = {Logo} style = {[styles.logo,{height: height *0.3}]} resizeMode = "contain" />

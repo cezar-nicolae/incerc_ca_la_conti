@@ -2,19 +2,24 @@ import React, {useState} from 'react'
 import {View, Text,StyleSheet, ScrollView} from 'react-native'
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
+import { useNavigation } from '@react-navigation/native';
 export default function SignUpScreen() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
+  const navigation = useNavigation();
   const onRegisterPressed = () => {
     console.warn("Sign in");
+    navigation.navigate('ConfirmEmail');
   }
   const onSignInPressed = () => {
     console.warn('On SignInPressed');
+    navigation.navigate('SignIn');
   }
   const onTermsOfUsePressed = () => {
     console.warn('on terms of use');
+    
   }
   const onPrivacyPolicy = () => {
     console.warn('on privacy policy');
