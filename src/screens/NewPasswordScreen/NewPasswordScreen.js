@@ -10,7 +10,7 @@ export default function NewPasswordScreen() {
 
   const onSubmitPressed = () => {
     console.warn("On Send Pressed");
-    navigation.navigate('Home');
+    navigation.navigate('HomeScreen');
   }
   const onSignInPressed = () => {
     console.warn('On SignInPressed');

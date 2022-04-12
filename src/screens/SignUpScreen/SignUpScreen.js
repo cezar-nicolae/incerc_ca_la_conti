@@ -1,17 +1,60 @@
 import React, {useState} from 'react'
-import {View, Text,StyleSheet, ScrollView} from 'react-native'
+import {View, Text,StyleSheet, ScrollView,Platform} from 'react-native'
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
+const API_URL = Platform.OS === 'ios' ? 'http://localhost:19006' : 'http://localhost:19006';
+
 export default function SignUpScreen() {
-  const [username, setUsername] = useState('');
+  const [name, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [passwordRepeat, setPasswordRepeat] = useState('');
   const navigation = useNavigation();
   const onRegisterPressed = () => {
-    console.warn("Sign in");
-    navigation.navigate('ConfirmEmail');
+    console.warn("Sign Up");
+    const payload = {
+      email,
+      name,
+      password,
+  };
+  console.warn("emailul introdus este: " + email);
+  fetch(`${API_URL}/signup`, {
+    
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+})
+.then(async res => { 
+  console.warn("go in fetch");
+  console.warn("resursa mea" );
+  //console.warn(res.json())
+    try {
+        const jsonRes = await res.json();
+        console.warn("try");
+        //console.warn(res.text());
+        if (res.status !== 200) {
+          console.warn("eroare");
+        } else {
+          console.warn("e bine!");
+          navigation.navigate('ConfirmEmail');
+           
+        }
+    } catch (err) {
+        console.log(err);
+        console.warn("eroare1"+ err);
+
+    };
+})
+.catch(err => {
+    console.log(err);
+    //console.warn("eroare"+err);
+
+});
+
+    
   }
   const onSignInPressed = () => {
     console.warn('On SignInPressed');
@@ -27,7 +70,7 @@ export default function SignUpScreen() {
     return (<ScrollView showsVerticalScrollIndicator={false}>      
       <View style = {styles.root}>
         <Text style={styles.title}>Create an account</Text>
-    <CustomInput placeholder="Username" value={username} setValue = {setUsername} />
+    <CustomInput placeholder="Username" value={name} setValue = {setUsername} />
     <CustomInput placeholder="Email" value ={email} setValue = {setEmail} />
     <CustomInput placeholder="Password" value ={password} setValue = {setPassword} secureTextEntry={true}/>
     <CustomInput placeholder="Repeat Password" value ={passwordRepeat} setValue = {setPasswordRepeat} secureTextEntry={true}/>

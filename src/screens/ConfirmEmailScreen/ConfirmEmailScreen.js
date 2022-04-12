@@ -10,7 +10,7 @@ export default function ConfirmEmailScreen() {
 
   const onConfirmPressed = () => {
     console.warn("On Confirm Pressed");
-    navigation.navigate('Home');
+    navigation.navigate('HomeScreen');
   }
   const onSignInPressed = () => {
     console.warn('On SignInPressed');

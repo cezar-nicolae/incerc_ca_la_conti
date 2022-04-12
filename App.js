@@ -5,8 +5,7 @@ import Navigation from './src/navigation';
 export default function App() {
   return (
     <View style={styles.container}>
-    <Navigation />
-      <StatusBar style="auto" />
+  <Navigation />
     </View>
   );
 }
@@ -15,7 +14,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f9fbfc',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
